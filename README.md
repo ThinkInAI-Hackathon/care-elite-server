@@ -1,44 +1,47 @@
-# 月子中心孕产康养AI专家系统 (MCP Server)
+# 月子中心专家 Agent
 
-基于AI技术的孕产康养智能咨询系统，为月子中心提供专业的客户服务支持。
+本项目是一个基于MCP-Server的月子中心专家Agent，用于辅助销售为用户介绍月子中心的服务。
 
-## 主要功能
+## 功能特点
 
-1. **数据采集分析**：通过Agent语音交互记录并分析宝妈生理和需求数据
-2. **模型分析**：大模型+RAG检索增强，搭建私有知识库生成内调外养个性化定制方案
-3. **案例库建设**：建立客户档案库，提供历史案例参考，助力服务优化
+1. **信息收集**：记录并处理用户与销售的语音交流，生成用户画像
+2. **服务推荐**：基于用户画像，从销售心得数据库中匹配合适的话术
+3. **案例展示**：展示与用户情况相近的成功合作案例
 
-## 技术架构
-
-- Python FastAPI 后端服务
-- LangChain 知识库及智能代理
-- 向量数据库实现RAG
-- 大语言模型集成
-- WebSocket 实时通信
-
-## 快速开始
+## 安装方法
 
 ```bash
-# 克隆仓库
-git clone https://github.com/yourusername/care-elite-server.git
-cd care-elite-server
-
-# 创建并激活虚拟环境
-python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
-
 # 安装依赖
 pip install -r requirements.txt
-
-# 启动服务
-python app/main.py
 ```
 
-## Cursor 接入指南
+## 使用方法
 
-1. 在Cursor中通过WebSocket连接至MCP服务器
-2. 发送认证请求获取会话Token
-3. 通过语音API将用户对话实时转发至服务器
-4. 接收服务器响应并在界面上展示
+```bash
+# 启动服务
+python -m venv .venv
 
-详细API文档请参考 [docs/api_reference.md](docs/api_reference.md)
+source .venv/bin/activate
+pip install -r requirements.txt
+python main.py
+```
+
+## 项目结构
+
+- `main.py`: 主程序入口
+- `care_elite/`: 主要代码目录
+  - `server.py`: MCP服务器实现
+  - `tools/`: 工具函数
+    - `information_collector.py`: 信息收集工具
+    - `service_recommender.py`: 服务推荐工具
+    - `case_presenter.py`: 案例展示工具
+  - `voice/`: 语音处理相关
+    - `speech_to_text.py`: 语音转文字
+    - `text_to_speech.py`: 文字转语音
+  - `database/`: 数据库操作
+    - `user_profile.py`: 用户画像数据库
+    - `sales_experience.py`: 销售心得数据库
+    - `case_database.py`: 案例数据库
+  - `utils/`: 工具函数目录
+    - `profile_generator.py`: 用户画像生成器
+    - `common.py`: 通用工具函数 

@@ -1,0 +1,20 @@
+version: "3.9"
+services:
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+
+  mcp-mongo-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - MCP_MONGODB_URI=mongodb://mongo:27017/database
+      - MCP_MONGODB_READONLY=true
+    tty: true
+    stdin_open: true
+    depends_on:
+      - mongo
